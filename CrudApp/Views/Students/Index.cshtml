@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CrudApp.Models.Student>
+
+@{
+    ViewBag.Title = "Students List";
+}
+
+<h2>Students List</h2>
+
+@* This is a Razor comment — like // in C# but for HTML *@
+@* @Html.ActionLink creates an <a> tag linking to the Create action *@
+<p>
+    @Html.ActionLink("Add New Student", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+@* This table displays all students fetched from the database *@
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* Loop through each student and create a table row *@
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.Name</td>
+                <td>@student.Age</td>
+                <td>@student.Email</td>
+                <td>@student.Grade</td>
+                <td>
+                    @* Links to Edit and Delete actions, passing the student Id *@
+                    @Html.ActionLink("Edit", "Edit", new { id = student.Id }, new { @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = student.Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

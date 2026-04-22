@@ -1,0 +1,47 @@
+﻿@model CrudApp.Models.Student
+
+@{
+    ViewBag.Title = "Add New Student";
+}
+
+<h2>Add New Student</h2>
+
+@* Html.BeginForm() generates an HTML <form> tag                    *@
+@* It automatically posts to the Create action in StudentsController *@
+@using (Html.BeginForm())
+{
+    @* AntiForgeryToken adds a hidden security field to prevent CSRF attacks *@
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @* LabelFor generates a <label> tag for the Name property *@
+        @Html.LabelFor(m => m.Name)
+
+        @* EditorFor generates an <input> field for the Name property *@
+        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+
+        @* ValidationMessageFor shows error if Name is empty *@
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age)
+        @Html.EditorFor(m => m.Age, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Grade)
+        @Html.EditorFor(m => m.Grade, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Grade, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Student</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
